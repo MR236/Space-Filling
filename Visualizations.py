@@ -1,3 +1,6 @@
+import os
+os.chdir("/Users/MRisk/Desktop/SpaceFillingCurves/SpaceFilling")
+
 import BaseFunctions as SFC
 import matplotlib.pyplot as plt
 
@@ -29,4 +32,9 @@ axes[1].set_ylim([0,1])
 axes[0].set_xlabel("Generation of Hilbert's Curve, n=2")
 axes[1].set_xlabel("Generation of Hilbert's Curve, n=3")
 fig.tight_layout()
+plt.show()
+
+plotA = plt.figure(figsize=(7,7))
+plotA = plt.plot(*zip(*SFC.Sierpinski_Polygon(5)), color = "black", linewidth = 5)
+plotA = plt.axis('off', emit=False)
 plt.show()
