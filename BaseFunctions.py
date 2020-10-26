@@ -45,3 +45,25 @@ def Hilbert_Polygon(n):
         nodal_points.append(Hilbert_Curve(quaternary(i/4**n)))
     nodal_points.append([1, 0])
     return nodal_points
+
+
+def Sierpinski_Curve(q):
+    nj = 0
+    dj = 0
+    x = 0
+    y = 0
+    for j in range(1, len(q) + 1):
+        x += (((-1)**nj)/(2**j))*sgn(q[j-1])*((1-dj)*(1+(-1)**dj)+0.5*(dj-2)*(1-(-1)**dj)*(1+(-1)**q[j-1]))
+        y += (((-1)**nj)/(2**j))*sgn(q[j-1])*((2-dj)*(1-(-1)**dj)+0.5*(1-dj)*(1+(-1)**dj)*(1+(-1)**q[j-1]))
+        if q[j-1] == 2:
+            nj = (nj+1)%2
+        if q[j-1] == 1 or q[j-1] == 2:
+            dj = (dj+1)%4
+    return [x,y]
+
+def SierPinski_Polygon(n):
+    nodal_points = []
+    for i in range(0, 2**n):
+        nodal_points.append(Sierpinski_Curve(quaternary(i/2**n)))
+    nodal_points.append([1, 0])
+    return nodal_points
