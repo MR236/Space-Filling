@@ -65,5 +65,5 @@ def Sierpinski_Polygon(n):
     nodal_points = []
     for i in range(0, 2**n):
         nodal_points.append(Sierpinski_Curve(quaternary(i/2**n)))
-    nodal_points.append([1, 0])
+    nodal_points.append([2, 0])
     return nodal_points
