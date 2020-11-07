@@ -35,6 +35,6 @@ fig.tight_layout()
 plt.show()
 
 plotA = plt.figure(figsize=(7,7))
-plotA = plt.plot(*zip(*SFC.Sierpinski_Polygon(5)), color = "black", linewidth = 5)
-#plotA = plt.axis('off', emit=False)
+plotA = plt.plot(*zip(*SFC.Sierpinski_Polygon(11)), color = "black", linewidth = 5)
+plotA = plt.axis('off', emit=False)
 plt.show()
