@@ -70,36 +70,4 @@ def Sierpinski_Polygon(n):
     return nodal_points
 
 
-def Polya_Curve(q, peak):
-    e0j = 0
-    e3j = 0
-    nj = 0
-    dj = 0
-    s = [np.array([0,0]), np.array([peak[0]*2, 0]), np.array([peak[0]*2, peak[1]*2]), np.array([peak[0]*2, 0])]
-    S1 = np.array([[0.0, -1.0],
-                   [1.0, 0.0]])
-    image = np.array([0.0,0.0])
-    for j in range(1, len(q) + 1):
-        vec = np.matmul(np.linalg.matrix_power(S1, dj%4), s[q[j - 1]])
-        coef = (1/2**j)*(peak[1]**dj)*(peak[0]**e0j)*((2-peak[0])**e3j)*((-1)**(nj%2))
-
-        image += np.multiply(coef, vec)
-        if q[j-1] == 0:
-            e0j += 1
-        elif q[j-1] == 1:
-            dj += 1
-        elif q[j-1] == 2:
-            dj += 1
-            nj += 1
-        else:
-            e3j += 1
-    return [image[0], image[1]]
-
-
-def Polya_Polygon(n, peak):
-    nodal_points = []
-    for i in range(0, 2 ** n):
-        nodal_points.append(Polya_Curve(quaternary(i / 2 ** n), peak))
-    nodal_points.append([2, 0])
-    return nodal_points
 
