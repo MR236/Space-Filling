@@ -1,6 +1,5 @@
 import os
 os.chdir("/Users/MRisk/Desktop/SpaceFillingCurves/SpaceFilling")
-import numpy as np
 import BaseFunctions as SFC
 import matplotlib.pyplot as plt
 
@@ -35,11 +34,47 @@ fig.tight_layout()
 plt.show()
 
 
-it1 = SFC.Polya_Dissection(9, [0.75, 1])
-plotA = plt.figure(figsize=(7,7))
-for i in it1:
-    plotA = plt.plot(*zip(*i), color = "orange", linewidth = 3)
-plotA = plt.plot(*zip(*SFC.Polya_Polygon(9, [0.75, 1])), color="black", linewidth=1)
-plotA = plt.axis('off', emit=False)
-#plotA = plt.xlabel("Generation of Polya's Space Filling Curve, 11th Iteration")
+# it1 = SFC.Polya_Dissection(9, [0.75, 1])
+# plotA = plt.figure(figsize=(7,7))
+# for i in it1:
+#     plotA = plt.plot(*zip(*i), color = "orange", linewidth = 3)
+# plotA = plt.plot(*zip(*SFC.Polya_Polygon(9, [0.75, 1])), color="black", linewidth=1)
+# plotA = plt.axis('off', emit=False)
+# #plotA = plt.xlabel("Generation of Polya's Space Filling Curve, 11th Iteration")
+# plt.show()
+Polya1 = SFC.Polya_Dissection(0, [0.75, 1])
+Polya2 = SFC.Polya_Dissection(1, [0.75, 1])
+Polya3 = SFC.Polya_Dissection(2, [0.75, 1])
+fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(9, 3))
+for i in Polya1:
+    axes[0].plot(*zip(*i), linewidth = 5, color = "black")
+axes[0].plot(*zip(*SFC.Polya_Polygon(1, [0.75, 1])), color="red", linewidth=3)
+for i in Polya2:
+    axes[1].plot(*zip(*i), linewidth = 5, color = "black")
+axes[1].plot(*zip(*SFC.Polya_Polygon(2, [0.75, 1])), color="red", linewidth=3)
+for i in Polya3:
+    axes[2].plot(*zip(*i), linewidth = 5, color = "black")
+axes[2].plot(*zip(*SFC.Polya_Polygon(3, [0.75, 1])), color="red", linewidth=3)
+axes[0].set_xticks([])
+axes[0].set_yticks([])
+axes[1].set_xticks([])
+axes[1].set_yticks([])
+axes[2].set_xticks([])
+axes[2].set_yticks([])
+axes[0].set_xticklabels([])
+axes[0].set_yticklabels([])
+axes[1].set_xticklabels([])
+axes[1].set_yticklabels([])
+axes[2].set_xticklabels([])
+axes[2].set_yticklabels([])
+axes[0].set_xlim([-0.25,2.25])
+axes[0].set_ylim([-0.25,1.25])
+axes[1].set_xlim([-0.25,2.25])
+axes[1].set_ylim([-0.25,1.25])
+axes[2].set_xlim([-0.25,2.25])
+axes[2].set_ylim([-0.25,1.25])
+axes[0].set_xlabel("Generation of Polya's Curve, n=1")
+axes[1].set_xlabel("Generation of Polya's Curve, n=2")
+axes[2].set_xlabel("Generation of Polya's Curve, n=3")
+fig.tight_layout()
 plt.show()
