@@ -70,4 +70,26 @@ def Sierpinski_Polygon(n):
     return nodal_points
 
 
+def Polya_Dissection(n, peak):
+    TriangleN = [[np.array((0,0)), np.array((peak[0], peak[1])), np.array(((peak[0]**2+peak[1]**2)/peak[0],0))]]
+    for i in range(n):
+        NewTriangles = []
+        for x in TriangleN:
+            a = np.linalg.norm(x[1]-x[0])
+            c = np.linalg.norm(x[2]-x[0])
+            r = a**2/c
+            bisect_p = np.add(np.multiply(r/c, x[2]-x[0]), x[0])
+            NewTriangles.append([x[0], bisect_p, x[1]])
+            NewTriangles.append([x[1], bisect_p, x[2]])
+        TriangleN = NewTriangles
+    Triangles = []
+    for i in TriangleN:
+        points = []
+        points.append([i[0][0], i[0][1]])
+        points.append([i[1][0], i[1][1]])
+        points.append([i[2][0], i[2][1]])
+        points.append([i[0][0], i[0][1]])
+        Triangles.append(points)
+    return Triangles
+
 

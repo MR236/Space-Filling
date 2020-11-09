@@ -1,6 +1,6 @@
 import os
 os.chdir("/Users/MRisk/Desktop/SpaceFillingCurves/SpaceFilling")
-
+import numpy as np
 import BaseFunctions as SFC
 import matplotlib.pyplot as plt
 
@@ -34,7 +34,16 @@ axes[1].set_xlabel("Generation of Hilbert's Curve, n=3")
 fig.tight_layout()
 plt.show()
 
+# plotA = plt.figure(figsize=(7,7))
+# plotA = plt.plot(*zip(*SFC.Sierpinski_Polygon(7)), color = "black", linewidth = 2)
+# #plotA = plt.axis('off', emit=False)
+# plt.show()
+
+it1 = SFC.Polya_Dissection(5, [0.75, 1])
+print(it1)
+
 plotA = plt.figure(figsize=(7,7))
-plotA = plt.plot(*zip(*SFC.Sierpinski_Polygon(7, [1, 1])), color = "black", linewidth = 2)
+for i in it1:
+    plotA = plt.plot(*zip(*i), color = "black", linewidth = 2)
 #plotA = plt.axis('off', emit=False)
 plt.show()
