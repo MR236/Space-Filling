@@ -34,16 +34,12 @@ axes[1].set_xlabel("Generation of Hilbert's Curve, n=3")
 fig.tight_layout()
 plt.show()
 
-# plotA = plt.figure(figsize=(7,7))
-# plotA = plt.plot(*zip(*SFC.Sierpinski_Polygon(7)), color = "black", linewidth = 2)
-# #plotA = plt.axis('off', emit=False)
-# plt.show()
 
-it1 = SFC.Polya_Dissection(5, [0.75, 1])
-print(it1)
-
+it1 = SFC.Polya_Dissection(9, [0.75, 1])
 plotA = plt.figure(figsize=(7,7))
 for i in it1:
-    plotA = plt.plot(*zip(*i), color = "black", linewidth = 2)
-#plotA = plt.axis('off', emit=False)
+    plotA = plt.plot(*zip(*i), color = "orange", linewidth = 3)
+plotA = plt.plot(*zip(*SFC.Polya_Polygon(9, [0.75, 1])), color="black", linewidth=1)
+plotA = plt.axis('off', emit=False)
+#plotA = plt.xlabel("Generation of Polya's Space Filling Curve, 11th Iteration")
 plt.show()
