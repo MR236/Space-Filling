@@ -70,8 +70,8 @@ def Sierpinski_Polygon(n):
     return nodal_points
 
 
-def Polya_Dissection(n, peak):
-    TriangleN = [[np.array((0,0)), np.array((peak[0], peak[1])), np.array(((peak[0]**2+peak[1]**2)/peak[0],0))]]
+def Polya_Dissection(n, angle):
+    TriangleN = [[np.array((0,0)), np.array((2*np.cos(angle)**2, 2*np.sin(angle)*np.cos(angle))), np.array((2,0))]]
     for i in range(n):
         NewTriangles = []
         for x in TriangleN:
@@ -93,19 +93,20 @@ def Polya_Dissection(n, peak):
     return Triangles
 
 
-def Polya_Curve(q, peak):
+def Polya_Curve(q, angle):
     e0j = 0
     e3j = 0
     nj = 0
     dj = 0
-    hyp_length = (peak[0]**2+peak[1]**2)/peak[0]
-    s = [np.array([0,0]), np.array([peak[0]*hyp_length, 0]), np.array([peak[0]*hyp_length, peak[1]*hyp_length]), np.array([peak[0]*hyp_length, 0])]
+    x = 2*np.cos(angle)**2
+    y = 2*np.sin(angle)*np.cos(angle)
+    s = [np.array([0,0]), np.array([x*2, 0]), np.array([x*2, y*2]), np.array([x*2, 0])]
     S1 = np.array([[0.0, -1.0],
                    [1.0, 0.0]])
     image = np.array([0.0,0.0])
     for j in range(1, len(q) + 1):
         vec = np.matmul(np.linalg.matrix_power(S1, dj%4), s[q[j - 1]])
-        coef = (1/hyp_length**j)*(peak[1]**dj)*(peak[0]**e0j)*((hyp_length-peak[0])**e3j)*((-1)**(nj%2))
+        coef = (1/2**j)*(y**dj)*(x**e0j)*((2-x)**e3j)*((-1)**(nj%2))
         image += np.multiply(coef, vec)
         if q[j-1] == 0:
             e0j += 1
@@ -119,10 +120,10 @@ def Polya_Curve(q, peak):
     return [image[0], image[1]]
 
 
-def Polya_Polygon(n, peak):
+def Polya_Polygon(n, angle):
     nodal_points = []
     for i in range(0, 2 ** n):
-        nodal_points.append(Polya_Curve(quaternary(i / 2 ** n), peak))
-    nodal_points.append([(peak[0]**2+peak[1]**2)/peak[0], 0])
+        nodal_points.append(Polya_Curve(quaternary(i / 2 ** n), angle))
+    nodal_points.append([2, 0])
     return nodal_points
 
