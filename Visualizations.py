@@ -4,6 +4,8 @@ import BaseFunctions as SFC
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+
 plotA = plt.figure(figsize=(7,7))
 plotA = plt.plot(*zip(*SFC.Hilbert_Polygon(5)), color = "black", linewidth = 5)
 plotA = plt.axis('off', emit=False)
@@ -39,7 +41,7 @@ it1 = SFC.Polya_Dissection(9, np.arctan(4/3))
 plotA = plt.figure(figsize=(20,10))
 for i in it1:
     plotA = plt.plot(*zip(*i), color = "orange", linewidth = 3)
-plotA = plt.plot(*zip(*SFC.Polya_Polygon(9, np.arctan(4/3))), color="blue", linewidth=1)
+plotA = plt.plot(*zip(*SFC.Experimental_Polya_Polygon(9, np.arctan(4/3))), color="blue", linewidth=1)
 plotA = plt.axis('off', emit=False)
 #plotA = plt.xlabel("Generation of Polya's Space Filling Curve, 11th Iteration")
 plt.show()

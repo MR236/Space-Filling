@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 def quaternary(n):
     k = n
@@ -127,3 +128,49 @@ def Polya_Polygon(n, angle):
     nodal_points.append([2, 0])
     return nodal_points
 
+
+def Experimental_Polya_Curve(q, angle):
+    aexp = 1
+    bexp = 0
+    a = np.cos(angle)
+    b = np.sin(angle)
+    nj = 0
+    dj = 0
+    x = 0
+    y = 0
+    for j in range(1, len(q) + 1):
+        x += (((-1)**nj)*(a**aexp)*(b**bexp))*sgn(q[j-1])*(a*(1-dj)*(1+(-1)**dj)+b*0.5*(dj-2)*(1-(-1)**dj)*(1+(-1)**q[j-1]))
+        y += (((-1)**nj)*(a**aexp)*(b**bexp))*sgn(q[j-1])*(a*(2-dj)*(1-(-1)**dj)+b*0.5*(1-dj)*(1+(-1)**dj)*(1+(-1)**q[j-1]))
+        if q[j-1] == 0:
+            aexp += 2
+        elif q[j-1] == 1:
+            aexp += 1
+            bexp += 1
+            dj = (dj + 1) % 4
+        elif q[j-1] == 2:
+            aexp += 1
+            bexp += 1
+            dj = (dj + 1) % 4
+            nj = (nj + 1) % 2
+        else:
+            bexp += 2
+    return [x, y]
+
+
+def Experimental_Polya_Polygon(n, angle):
+    nodal_points = []
+    for i in range(0, 2 ** n):
+        nodal_points.append(Experimental_Polya_Curve(quaternary(i / 2 ** n), angle))
+    nodal_points.append([2, 0])
+    return nodal_points
+
+
+start=time.time()
+Experimental_Polya_Polygon(15, np.arctan(4/3))
+end=time.time()
+print(end-start)
+
+start=time.time()
+Polya_Polygon(15, np.arctan(4/3))
+end=time.time()
+print(end-start)
